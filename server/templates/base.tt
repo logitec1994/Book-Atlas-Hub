@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">
+    <title>{{ title }}</title>
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Main page</a></li>
+            <li><a href="/registration">Registration page</a></li>
+            {% if name %}
+            <li><a href="/{{ name }}">{{ name }}<a href="/logout">Logout</a></a></li>
+            {% endif %}
+        </ul>
+
+    </nav>
+
+    <div id="popup">
+        Lexa
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}
+    <script src="https://unpkg.com/htmx.org@1.9.9"
+        integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+</body>
+
+</html>

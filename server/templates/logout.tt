@@ -1,0 +1,3 @@
+{% include 'base.tt' %}
+
+<h1 id="logout_target">You were logout</h1>
