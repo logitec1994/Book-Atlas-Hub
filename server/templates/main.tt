@@ -1,9 +1,0 @@
-{% include 'base.tt' %}
-
-{% block content %}
-{% if cookie %}
-<h1>Page for users</h1>
-{% else %}
-<h1>Page for guests</h1>
-{% endif %}
-{% endblock %}

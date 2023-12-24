@@ -1,0 +1,3 @@
+{% include "unauthorized/base.tt" %}
+
+<h1>{{ error }}</h1>

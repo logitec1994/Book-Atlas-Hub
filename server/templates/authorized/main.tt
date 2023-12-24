@@ -1,0 +1,5 @@
+{% include 'authorized/base.tt' %}
+
+{% block content %}
+<h1>Page for users</h1>
+{% endblock %}

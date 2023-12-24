@@ -1,0 +1,5 @@
+{% include 'unauthorized/base.tt' %}
+
+{% block content %}
+<h1>Page for guests</h1>
+{% endblock %}

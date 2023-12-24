@@ -1,42 +1,36 @@
-from flask import Blueprint, jsonify, request
-import sqlite3
+from flask import Blueprint, request, jsonify
+from .database.db_handler import create_user, get_user_by_username
 
-DB_FILE = "book_hub.db"
 
 api_bp = Blueprint("api", __name__, url_prefix="/api")
 
 
-def create_table():
-    conn = sqlite3.connect(DB_FILE)
-    conn.execute("""
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    password TEXT,
-    email TEXT
-)
-""")
-
-    conn.commit()
-    conn.close()
+@api_bp.route("/users")
+def get_users():
+    return "List of all users"
 
 
-def create_user(login, password, email):
-    conn = sqlite3.connect(DB_FILE)
-    conn.execute("""
-INSERT INTO users (username, password, email) VALUES (?, ?, ?)
-""", (login, password, email)
-    )
-    conn.commit()
-    conn.close()
+@api_bp.route("/users/<username>")
+def get_user(username):
+    user = get_user_by_username(username)
+    if user:
+        return jsonify({"user_id": user[0]})
+    return jsonify({"message": "user not found"}), 404
 
 
-@api_bp.route("/registration", methods=["POST"])
-def registration():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "Empty data"}), 400
+@api_bp.route("/users", methods=["POST"])
+def add_user():
+    user_data = request.get_json()
+    create_user(user_data.get("login"), user_data.get(
+        "password"), user_data.get("email"))
+    return "User successfully added"
 
-    create_user(data["login"], data["password"], data["email"])
 
-    return jsonify({"message": "Registration successful!"}), 201
+@api_bp.route("/users/<int:user_id>", methods=["PUT"])
+def update_user(user_id):
+    return f"User {user_id} were successfully updated"
+
+
+@api_bp.route("/users/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    return f"User {user_id} were successfully deleted"

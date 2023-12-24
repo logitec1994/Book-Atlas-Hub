@@ -16,10 +16,7 @@
     <nav>
         <ul>
             <li><a href="/">Main page</a></li>
-            <li><a href="/registration">Registration page</a></li>
-            {% if name %}
-            <li><a href="/{{ name }}">{{ name }}<a href="/logout">Logout</a></a></li>
-            {% endif %}
+            <li><a href="/profile/{{ name }}">{{ name }}<a href="/logout">Logout</a></a></li>
         </ul>
 
     </nav>

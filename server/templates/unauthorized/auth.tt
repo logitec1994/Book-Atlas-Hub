@@ -1,0 +1,13 @@
+{% include 'unauthorized/base.tt' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/auth.css') }}">
+{% endblock %}
+
+<div id="form">
+    <input type="text" name="login" id="login" placeholder="Enter your login">
+    <input type="password" name="password" id="password" placeholder="Enter your password">
+    <div id="button" hx-post="/auth" hx-include="[name='password'], [name='login']" hx-ext="json-enc"
+        hx-target="#popup">
+        Authorization</div>
+</div>
